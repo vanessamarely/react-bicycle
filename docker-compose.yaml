@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  app:
+    container_name: client-react-a
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: client-react-b
+    ports:
+      - "8080:80"
+
