@@ -38,7 +38,7 @@ const Login = () => {
                       <label htmlFor = "exampleInputPassword1" className = "form-label">Password</label>
                   </div>
                   <div>
-                      <button type = "submit" className = "btn btn-primary pt-3 pb-3" onClick = {(e) => loginWithUsernameAndPassword(e)}>Submit</button>
+                      <button type = "submit" className = "btn btn-primary" onClick = {(e) => loginWithUsernameAndPassword(e)}>Submit</button>
                   </div>
                   <div>
                       <span>Need to sign up for an account? <Link to = "./signup">Click here.</Link></span>

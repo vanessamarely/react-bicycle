@@ -15,8 +15,8 @@ const Profile = () => {
 
     return(
         <div className = "container">
-            <div className = "row justify-content-center">
-                <div className = "col-md-4 text-center">
+            <div className = "">
+                <div className = "">
                     <p>Welcome <em className = "text-decoration-underline">{ user.email }</em>. You are logged in!</p>
                     <div className = "d-grid gap-2">
                         <button type = "submit" className = "btn btn-primary pt-3 pb-3" onClick = {(e) => logoutUser(e)}>Logout</button>
