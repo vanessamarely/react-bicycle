@@ -44,14 +44,14 @@ const Login = () => {
           <div>
             <label
               className="block text-sm font-medium leading-6 text-gray-900"
-              htmlFor="exampleInputEmail1"
+              htmlFor="InputEmail1"
             >
               Email address
             </label>
             <input
               type="email"
               className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              id="exampleInputEmail1"
+              id="InputEmail1"
               aria-describedby="emailHelp"
               placeholder="name@example.com"
               value={email}
@@ -60,7 +60,7 @@ const Login = () => {
           </div>
           <div>
             <label
-              htmlFor="exampleInputPassword1"
+              htmlFor="InputPassword1"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Password
@@ -68,7 +68,7 @@ const Login = () => {
             <input
               type="password"
               className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              id="exampleInputPassword1"
+              id="InputPassword1"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

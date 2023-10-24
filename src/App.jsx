@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import Bicycle from "./pages/Bicycle";
 import Rent from "./pages/Rent";
 import GeneralInfo from "./pages/GeneralInfo";
+import RentBicycle from "./pages/RentBicycle";
+import CreateBicycle from "./pages/CreateBicycle";
 
 import "./App.css";
 
@@ -21,7 +23,9 @@ function App() {
         <Route index element={<Login />} />
         <Route path="/home/*" element={<Dashboard />}>
           <Route path="bicycle" element={<Bicycle />} />
-          <Route path="rent/*" element={<Rent />} />
+          <Route path="create-bicycle" element={<CreateBicycle />} />
+          <Route path="rent" element={<Rent />} />
+          <Route path="rent-create" element={<RentBicycle />} />
           <Route index element={<GeneralInfo />} />
           <Route path="profile" element={<Profile />} />
         </Route>
