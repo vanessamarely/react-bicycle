@@ -1,9 +1,13 @@
 FROM node:18
 
-WORKDIR src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
+WORKDIR /react-vite-app
 
 EXPOSE 3000
-CMD ["npm", "dev"]
+
+COPY package.json package-lock.json ./
+
+RUN npm install --silent & npm cache clean --force
+
+COPY . ./
+
+CMD ["npm", "run", "dev"]
