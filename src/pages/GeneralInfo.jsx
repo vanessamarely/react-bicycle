@@ -4,7 +4,7 @@ const GeneralInfo = () => {
   const makeAPICall = async () => {
     try {
       const response = await fetch(
-        "http://a1cdc6e54aa964ff5b99973eb70bcd25-330480357.us-west-2.elb.amazonaws.com/",
+        "http://afe885f8c06484240a75aa056f46dde6-1043946020.us-west-2.elb.amazonaws.com",
         { mode: "cors" }
       );
       const data = await response.json();
