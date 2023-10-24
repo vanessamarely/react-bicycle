@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCDTJwUzzK2zmWQ3yEuuqJbO7UnqodjwKk",
   authDomain: "bicycle-93746.firebaseapp.com",
   projectId: "bicycle-93746",
