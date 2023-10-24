@@ -1,11 +1,11 @@
 version: '3.9'
 services:
   app:
-    container_name: client-react-a
+    container_name: rentbike-front
     build:
       context: .
       dockerfile: Dockerfile
-    image: client-react-b
+    image: rentbike-front
     ports:
-      - "8080:80"
+      - "3000"
 
