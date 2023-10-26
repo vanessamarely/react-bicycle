@@ -4,7 +4,7 @@ const Geolocation = ({ lat, long}) => {
   console.log(lat, long);
   const position = [lat, long];
   return (
-    <div className="flex flex-wrap gap-2 justify-around">
+    <div className="flex flex-col">
       <div className="w-60 h-60 overflow-hidden">
         <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
           <TileLayer

@@ -1,21 +1,6 @@
 import { useEffect } from "react";
 
-const GeneralInfo = () => {
-  const makeAPICall = async () => {
-    try {
-      const response = await fetch(
-        "http://afe885f8c06484240a75aa056f46dde6-1043946020.us-west-2.elb.amazonaws.com"
-      );
-      const data = await response.json();
-      console.log({ data });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    makeAPICall();
-  }, []);
-
+const GeneralInfo = () => { 
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
