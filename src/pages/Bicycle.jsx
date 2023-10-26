@@ -27,6 +27,7 @@ const Bicycle = () => {
       image: "https://source.unsplash.com/1600x900/?bicycle",
     },
   ];
+  console.log(bicycle)
   return (
     <div className="w-full">
       <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">

@@ -13,7 +13,6 @@ const Login = () => {
 
   const loginWithUsernameAndPassword = async (e) => {
     e.preventDefault();
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("./home");

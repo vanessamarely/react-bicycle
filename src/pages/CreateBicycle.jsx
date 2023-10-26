@@ -10,7 +10,6 @@ const initialData = {
 };
 const CreateBicycle = () => {
   const [data, setData] = useState(initialData);
-
   const handleCreate = (e) => {
     e.preventDefault();
   };

@@ -19,7 +19,6 @@ const Header = () => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         const uid = user.uid;
-        console.log("uid", uid);
         setUser({ id: uid, email: user.email });
       } else {
         // User is signed out

@@ -15,7 +15,6 @@ const Rent = () => {
   };
 
   const handleIsSelected = (selected) => {
-    console.log(selected);
     setIsSelected(!isSelected);
 
     handleLocation(

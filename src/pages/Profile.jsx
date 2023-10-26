@@ -4,7 +4,6 @@ import { auth } from "./../firebase";
 const Profile = () => {
   const navigate = useNavigate();
   const user = auth.currentUser;
-  console.log(user);
   return (
     <div className="flex flex-wrap gap-2 justify-around">
       <div className=" ">
