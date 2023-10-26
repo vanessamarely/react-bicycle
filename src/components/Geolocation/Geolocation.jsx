@@ -1,11 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
 
 const Geolocation = ({ lat, long}) => {
   console.log(lat, long);
   const position = [lat, long];
   return (
     <div className="flex flex-col">
-      <div className="w-60 h-60 overflow-hidden">
+      <div className="w-full">
         <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
