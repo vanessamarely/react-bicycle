@@ -64,16 +64,17 @@ const Rent = () => {
                   >
                     <path d="M7 0a7 7 0 0 0-1 13.92V19a1 1 0 1 0 2 0v-5.08A7 7 0 0 0 7 0Zm0 5.5A1.5 1.5 0 0 0 5.5 7a1 1 0 0 1-2 0A3.5 3.5 0 0 1 7 3.5a1 1 0 0 1 0 2Z" />
                   </svg>
+
+                  <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                    Bicycle ID: {rent.bicycleId}
+                  </h5>
+                  <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
+                    User ID: {rent.userId}
+                  </p>
+                  <p>Rent Date: {rent.rentDate}</p>
+                  <p>Return Date: {rent.returnDate}</p>
+                  <p>Status: {rent.status}</p>
                 </button>
-                <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                  Bicycle ID: {rent.bicycleId}
-                </h5>
-                <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
-                  User ID: {rent.userId}
-                </p>
-                <p>Rent Date: {rent.rentDate}</p>
-                <p>Return Date: {rent.returnDate}</p>
-                <p>Status: {rent.status}</p>
               </div>
             ))}
           </>

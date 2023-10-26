@@ -29,27 +29,34 @@ const RentBicycle = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const payload = {
-      bicycleId: rentData.bicycleId,
-      userId: user.id,
-      rentDate: rentData.rentDate,
-      returnDate: rentData.returnDate,
-      status: rentData.status,
+      bicycleId: rentData?.bicycleId,
+      userId: user?.id,
+      rentDate: rentData?.rentDate,
+      returnDate: rentData?.returnDate,
+      status: rentData?.status,
       geolocation,
     };
-    console.log("payload ", payload);
     postData(payload);
   };
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="block py-2 pl-3 pr-4 text-indigo-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-indigo-600 md:p-0 dark:text-indigo-500 md:dark:hover:text-indigo-500 dark:hover:bg-gray-700 dark:hover:text-indigo-500 md:dark:hover:bg-transparent dark:border-gray-700">
-        <Link to="/home/rent">Ver todas las Bicicletas</Link>
+        <Link to="/home/rent">Ver todas las Reservas</Link>
       </div>
       <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Rentar una Bicicleta
         </h2>
       </div>
+      {data && (
+        <div
+          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <p>{data && <div>{data?.message}</div>}</p>
+        </div>
+      )}
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
@@ -66,7 +73,7 @@ const RentBicycle = () => {
               placeholder="ID Bicicleta"
               // value={rentData?.bicycleId}
               onChange={(e) =>
-                setRentData({ ...rentData, bicycleId: e.target.value })
+                setRentData({ ...rentData, bicycleId: e.target?.value })
               }
             />
           </div>
@@ -177,7 +184,6 @@ const RentBicycle = () => {
             </button>
           </div>
         </form>
-        {data && <div>{data.message}</div>}
       </div>
     </div>
   );

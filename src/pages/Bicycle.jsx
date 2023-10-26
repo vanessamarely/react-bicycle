@@ -29,14 +29,19 @@ const Bicycle = () => {
   ];
   return (
     <div className="flex flex-wrap gap-2 justify-around">
-      {bicycle.map((bicycle) => (
-        <Card
-          key={bicycle.id}
-          status={bicycle.status}
-          title={bicycle.brand}
-          img={bicycle.image}
-        />
-      ))}
+      <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        Bicicletas
+      </h1>
+      <div>
+        {bicycle.map((bicycle) => (
+          <Card
+            key={bicycle.id}
+            status={bicycle.status}
+            title={bicycle.brand}
+            img={bicycle.image}
+          />
+        ))}
+      </div>
     </div>
   );
 };
