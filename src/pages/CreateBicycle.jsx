@@ -13,7 +13,6 @@ const CreateBicycle = () => {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    console.log(data);
   };
 
   const handleImage = (e) => {
