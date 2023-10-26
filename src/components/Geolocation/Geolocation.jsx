@@ -17,7 +17,7 @@ const Geolocation = ({ lat, long}) => {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
-          <Marker position={[6.230833, -75.590553]}>
+          <Marker position={position}>
             <Popup>Popup for Marker</Popup>
             <Tooltip>Tooltip for Marker</Tooltip>
           </Marker>
