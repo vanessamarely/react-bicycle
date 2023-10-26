@@ -1,5 +1,5 @@
 import usePostData from "./../hooks/usePostData";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "./../store/UserContext.jsx";
 import { urlCreateRent } from "./../utils/services.js";
 import { Link } from "react-router-dom";
@@ -26,6 +26,16 @@ const RentBicycle = () => {
   const { user } = useContext(UserContext);
   const { data, isLoading, error, postData } = usePostData(urlCreateRent);
 
+  const handleLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setGeolocationData({
+        ...geolocation,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const payload = {
@@ -38,6 +48,10 @@ const RentBicycle = () => {
     };
     postData(payload);
   };
+
+  useEffect(() => {
+    handleLocation();
+  }, []);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -55,6 +69,14 @@ const RentBicycle = () => {
           role="alert"
         >
           <p>{data && <div>{data?.message}</div>}</p>
+        </div>
+      )}
+      {error && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <p>{error?.message}</p>
         </div>
       )}
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -154,6 +176,7 @@ const RentBicycle = () => {
                 className="block w-1/2 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 id="InputLocation"
                 placeholder="Latitud"
+                value={geolocation?.latitude}
                 onChange={(e) =>
                   setGeolocationData({
                     ...geolocation,
@@ -166,6 +189,7 @@ const RentBicycle = () => {
                 className="block w-1/2 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 id="InputLocation"
                 placeholder="Longitud"
+                value={geolocation?.longitude}
                 onChange={(e) =>
                   setGeolocationData({
                     ...geolocation,

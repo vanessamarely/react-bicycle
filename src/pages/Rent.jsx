@@ -42,6 +42,14 @@ const Rent = () => {
           Rentar Bicicleta
         </button>
       </div>
+      {error && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <p>{error?.message}</p>
+        </div>
+      )}
       <div className="flex flex-wrap">
         {!isSelected ? (
           <>
@@ -68,9 +76,7 @@ const Rent = () => {
                   <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     Bicycle ID: {rent.bicycleId}
                   </h5>
-                  <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
-                    User ID: {rent.userId}
-                  </p>
+
                   <p>Rent Date: {rent.rentDate}</p>
                   <p>Return Date: {rent.returnDate}</p>
                   <p>Status: {rent.status}</p>

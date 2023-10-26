@@ -28,11 +28,11 @@ const Bicycle = () => {
     },
   ];
   return (
-    <div className="flex flex-wrap gap-2 justify-around">
+    <div className="w-full">
       <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
         Bicicletas
       </h1>
-      <div>
+      <div className="flex flex-wrap gap-2 ">
         {bicycle.map((bicycle) => (
           <Card
             key={bicycle.id}
