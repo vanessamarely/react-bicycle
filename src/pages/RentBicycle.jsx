@@ -15,6 +15,7 @@ const initialData = {
     longitude: 0,
   },
 };
+
 const initialGeolocationData = {
   latitude: 0,
   longitude: 0,

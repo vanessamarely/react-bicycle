@@ -14,7 +14,6 @@ const Signup = () => {
 
   const signupWithUsernameAndPassword = async (e) => {
     e.preventDefault();
-
     if (password === confirmPassword) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);

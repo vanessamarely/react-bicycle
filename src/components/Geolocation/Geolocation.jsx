@@ -2,7 +2,6 @@ import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 const Geolocation = ({ lat, long}) => {
-  console.log(lat, long);
   const position = [lat, long];
   return (
     <div className="flex flex-col">
