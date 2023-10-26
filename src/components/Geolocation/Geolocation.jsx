@@ -1,11 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
 
 const Geolocation = ({ lat, long}) => {
   console.log(lat, long);
   const position = [lat, long];
   return (
-    <div className="flex flex-wrap gap-2 justify-around">
-      <div className="w-60 h-60 overflow-hidden">
+    <div className="flex flex-col">
+      <div className="w-full">
         <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -16,7 +17,7 @@ const Geolocation = ({ lat, long}) => {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
-          <Marker position={[6.230833, -75.590553]}>
+          <Marker position={position}>
             <Popup>Popup for Marker</Popup>
             <Tooltip>Tooltip for Marker</Tooltip>
           </Marker>

@@ -2,12 +2,32 @@ import { NavLink } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "./../../firebase.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { useContext } from "react";
+import UserContext from "./../../store/UserContext.jsx";
 
 import Logo from "./../../assets/bicycle-logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = auth.currentUser;
+  const { setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        const uid = user.uid;
+        console.log("uid", uid);
+        setUser({ id: uid, email: user.email });
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+      }
+    });
+  }, []);
 
   const logoutUser = async (e) => {
     e.preventDefault();
@@ -44,20 +64,16 @@ const Header = () => {
             to="profile"
             className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
           >
-            {user ? user.email : "User"}
+            {user?.email}
           </NavLink>
 
-          {user ? (
-            <button
-              type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              onClick={(e) => logoutUser(e)}
-            >
-              Logout
-            </button>
-          ) : (
-            <Link to="/">Login </Link>
-          )}
+          <button
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            onClick={(e) => logoutUser(e)}
+          >
+            Logout
+          </button>
         </div>
       </nav>
     </header>
