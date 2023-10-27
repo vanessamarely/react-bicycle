@@ -3,6 +3,7 @@ import useFetch from "./../hooks/useFetch";
 
 const GeneralInfo = () => {
   const { response, isLoading, error } = useFetch(urlGetAllCER);
+  console.log(response);
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
@@ -26,14 +27,16 @@ const GeneralInfo = () => {
             Puedes revisar los eventos que se han realizado
           </h1>
           <div>
-            {response?.filter(event => event.type === "event").map((event) => (
-              <div
-                key={event?.id}
-                className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-              >
-                {event?.description}
-              </div>
-            ))}
+            {response
+              ?.filter((event) => event.type === "event")
+              .map((event) => (
+                <div
+                  key={event?._id}
+                  className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                >
+                  {event?.description}
+                </div>
+              ))}
           </div>
         </div>
         <div className="grid md:grid-cols-2 gap-8">
@@ -60,14 +63,16 @@ const GeneralInfo = () => {
               Puedes revisar las competencias que se han realizado
             </p>
             <div>
-              {response?.filter(event => event.type === "competition").map((event) => (
-                <div
-                  key={event?.id}
-                  className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                >
-                  {event?.description}
-                </div>
-              ))}
+              {response
+                ?.filter((event) => event.type === "competition")
+                .map((event) => (
+                  <div
+                    key={event?._id}
+                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    {event?.description}
+                  </div>
+                ))}
             </div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
@@ -99,14 +104,16 @@ const GeneralInfo = () => {
               Puedes revisar las rutas que se han realizado
             </p>
             <div>
-              {response?.filter(event => event.type === "route").map((event) => (
-                <div
-                  key={event?.id}
-                  className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                >
-                  {event?.description}
-                </div>
-              ))}
+              {response
+                ?.filter((event) => event.type === "route")
+                .map((event) => (
+                  <div
+                    key={event?._id}
+                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    {event?.description}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
