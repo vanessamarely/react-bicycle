@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { urlGetAllRents } from "./../utils/services";
+import useFetch from "./../hooks/useFetch";
 
 const GeneralInfo = () => { 
-  
+  // const { response, isLoading, error } = useFetch(urlGetAllCER);
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">

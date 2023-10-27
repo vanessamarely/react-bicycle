@@ -29,10 +29,15 @@ const Signup = () => {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-10 w-auto" src={Logo} alt="Bicycle App" />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign Up
-        </h2>
+        <Link
+          to="/"
+          className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+        >
+          <img className="mx-auto h-24 md:h-52 w-24 md:w-52" src={Logo} alt="Bicycle App" />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign Up
+          </h2>
+        </Link>
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6">
@@ -103,7 +108,7 @@ const Signup = () => {
             <span>
               Go back to login?{" "}
               <Link
-                to="/"
+                to="/login"
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
               >
                 Click here.

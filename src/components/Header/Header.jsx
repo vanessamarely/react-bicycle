@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
+
 import { signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { auth } from "./../../firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
