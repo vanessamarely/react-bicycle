@@ -1,8 +1,9 @@
 import usePostData from "./../hooks/usePostData.jsx";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "./../store/UserContext.jsx";
-import { urlCreateRent } from "./../utils/services.js";
+import { urlCreateRent, urlGetAllBikes } from "./../utils/services.js";
 import { Link } from "react-router-dom";
+import useFetch from "./../hooks/useFetch";
 
 const initialData = {
   bicycleId: 1,
@@ -22,10 +23,11 @@ const initialGeolocationData = {
 };
 
 const RentBicycle = () => {
-  const [rentData, setRentData] = useState(initialData);
+  const [rentData, setRentData] = useState(null);
   const [geolocation, setGeolocationData] = useState(initialGeolocationData);
   const { user } = useContext(UserContext);
   const { data, isLoading, error, postData } = usePostData(urlCreateRent);
+  const { response: bikes } = useFetch(urlGetAllBikes);
 
   const handleLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -39,12 +41,13 @@ const RentBicycle = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const payload = {
       bicycleId: rentData?.bicycleId,
       userId: user?.id,
       rentDate: rentData?.rentDate,
       returnDate: rentData?.returnDate,
-      status: rentData?.status,
+      status: "Rented",
       geolocation,
     };
     postData(payload);
@@ -69,7 +72,7 @@ const RentBicycle = () => {
           className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
           role="alert"
         >
-          <p>{data && <div>{data?.message}</div>}</p>
+          <div>{data && <div>{data?.message}</div>}</div>
         </div>
       )}
       {error && (
@@ -77,28 +80,35 @@ const RentBicycle = () => {
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
           role="alert"
         >
-          <p>{error?.message}</p>
+          <div>{error?.message}</div>
         </div>
       )}
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label
-              className="block text-sm font-medium leading-6 text-gray-900"
-              htmlFor="InputIdBicycle"
-            >
-              ID Bicicleta
-            </label>
-            <input
-              type="text"
-              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              id="InputIdBicycle"
-              placeholder="ID Bicicleta"
-              // value={rentData?.bicycleId}
-              onChange={(e) =>
-                setRentData({ ...rentData, bicycleId: e.target?.value })
-              }
-            />
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="InputIdBicycle"
+              >
+                ID Bicicleta
+              </label>
+
+              <select
+                onChange={(e) =>
+                  setRentData({ ...rentData, bicycleId: e.target?.value })
+                }
+                id="InputIdBicycle"
+                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                <option value="">Seleccione una bicicleta</option>
+                {bikes?.filter((bicycle) => bicycle.status === "Available").map((bicycle, index) => (
+                  <option key={index} value={bicycle._id}>
+                    {bicycle.brand}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div>
             <label
@@ -143,7 +153,7 @@ const RentBicycle = () => {
               }
             />
           </div>
-          <div>
+          {/* <div>
             <label
               className="block text-sm font-medium leading-6 text-gray-900"
               htmlFor="InputStatus"
@@ -163,7 +173,7 @@ const RentBicycle = () => {
               <option value="Returned">Returned</option>
               <option value="Rented">Rented</option>
             </select>
-          </div>
+          </div> */}
           <div>
             <label
               className="block text-sm font-medium leading-6 text-gray-900"

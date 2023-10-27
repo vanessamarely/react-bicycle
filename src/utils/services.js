@@ -6,7 +6,7 @@ const urlServices = {
   bicycleErcBridge:
     "http://ab026d57bf14b494dbb5ee61e580e4b8-1353960719.us-west-2.elb.amazonaws.com/",
   bicycleBridge:
-    "http://a4e1cce62c5854732808f5e20e0a0b8e-140966598.us-west-2.elb.amazonaws.com",
+    "http://a4e1cce62c5854732808f5e20e0a0b8e-140966598.us-west-2.elb.amazonaws.com/",
   bicycleErc:
     "http://a6826666720194c8e82c49a39eaf7fd1-2131513785.us-west-2.elb.amazonaws.com/",
   bicycleGeo:
