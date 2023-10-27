@@ -1,4 +1,4 @@
-import usePostData from "./../hooks/usePostData";
+import usePostData from "./../hooks/usePostData.jsx";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "./../store/UserContext.jsx";
 import { urlCreateRent } from "./../utils/services.js";

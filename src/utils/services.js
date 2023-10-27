@@ -1,12 +1,31 @@
-const url = "https://97hfvjai4m.execute-api.us-west-2.amazonaws.com/eafit/"
+const url = "http://97hfvjai4m.execute-api.us-west-2.amazonaws.com/eafit/";
+
+const urlServices = {
+  bicycleBridgeRent:
+    "http://ad0691875d0fd4c4aaf3ccbdb224a27f-2030474594.us-west-2.elb.amazonaws.com/",
+  bicycleErcBridge:
+    "http://ab026d57bf14b494dbb5ee61e580e4b8-1353960719.us-west-2.elb.amazonaws.com/",
+  bicycleBridge:
+    "http://a4e1cce62c5854732808f5e20e0a0b8e-140966598.us-west-2.elb.amazonaws.com",
+  bicycleErc:
+    "http://a6826666720194c8e82c49a39eaf7fd1-2131513785.us-west-2.elb.amazonaws.com/",
+  bicycleGeo:
+    "http://a2b5f3407ab84486e92dc113f19dde3a-1076809140.us-west-2.elb.amazonaws.com/",
+  bicycleRent:
+    "http://afe885f8c06484240a75aa056f46dde6-1043946020.us-west-2.elb.amazonaws.com/",
+  bicycle:
+    "http://a329dbe5069de40a8a23e006e8959f38-933447715.us-west-2.elb.amazonaws.com/",
+  frontend:
+    "http://acd0bb6c5932948b4861e36cc16bee5d-2032216829.us-west-2.elb.amazonaws.com/",
+};
 
 /* Renting CRUD */
 
 // Crear una renta de bicicleta - POST
-export const urlCreateRent = `${url}api/rent/registry`;
+export const urlCreateRent = `${urlServices.bicycleBridgeRent}api/rent/registry`;
 
 // ver todas las rentas - GET
-export const urlGetAllRents = `${url}api/rent/getall`;
+export const urlGetAllRents = `${urlServices.bicycleBridgeRent}api/rent/getall`;
 
 // ver todas las rentas - UPDATE
 
@@ -16,7 +35,15 @@ export const urlGetAllRents = `${url}api/rent/getall`;
 /* General info - Competences, Events, Routes */
 
 // ver todos los eventos - GET
-export const urlGetAllCER= `${url}api/events`;
+export const urlGetAllCER = `${urlServices.bicycleErcBridge}api/events`;
+
+// ver todos los eventos - DELETE
+
+// ver todos los eventos - UPDATE
+
+
+// ver todos los bikes - GET
+export const urlGetAllBikes = `${urlServices.bicycleBridge}api/bikes`;
 
 // ver todos los eventos - DELETE
 
