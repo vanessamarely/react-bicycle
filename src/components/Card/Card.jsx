@@ -12,7 +12,7 @@ const Card = ({ title, img, status }) => (
         {title}
       </h5>
       <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-        Status:{" "}
+        Status:
         <span
           className={
             status === "Available" ? "text-green-600" : "text-gray-600"

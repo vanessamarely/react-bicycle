@@ -42,7 +42,6 @@ const Rent = () => {
     const params = {
       rentId: rent.rentId,
       bicycleId: rent.bicycleId,
-      status: "Unavailable",
       returnDate: rent.returnDate,
     };
     await patchData(params);
@@ -81,14 +80,13 @@ const Rent = () => {
                   key={rent?.rentId}
                   className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                 >
-                  {rent.status === "Available" && (
-                    <button
-                      className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
-                      onClick={() => handleEditRent(rent)}
-                    >
-                      Entregar Bicicleta
-                    </button>
-                  )}
+                  <button
+                    className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
+                    onClick={() => handleEditRent(rent)}
+                  >
+                    Entregar Bicicleta
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => handleIsSelected(rent)}

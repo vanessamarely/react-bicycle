@@ -24,14 +24,28 @@ const Admin = () => {
     urlBicycleBridge,
     urlBicycleService
   );
+  const {
+    dataDelete: dataDeleteERC,
+    errorDelete: errorDeleteERC,
+    deleteData: deleteDataERC,
+  } = useDelete(urlGetAllCER, urlGetAllCERService);
+
   const { response: eventsData } = useFetch(urlGetAllCER, urlGetAllCERService);
   const { response: bikes } = useFetch(urlGetAllBikes, urlGetAllBikesService);
   const [optionSelected, setOptionSelected] = useState("rent");
   const [showCreateEvent, setShowCreateEvent] = useState(false);
   const [showCreateBicycle, setShowCreateBicycle] = useState(false);
   const [dataType, setDataType] = useState(null);
+  const [dataTypeERC, setDataTypeERC] = useState(null);
+
   const handleSetBicycleForm = (e) => {
     setShowCreateBicycle(e);
+    setDataType(null);
+  };
+
+  const handleSetBicycleFormECR = (e) => {
+    setShowCreateEvent(e);
+    setDataTypeERC(null);
   };
 
   const handleEditBicycle = (e) => {
@@ -40,8 +54,24 @@ const Admin = () => {
   };
 
   const handleDeleteBicycle = (e) => {
-    deleteData({bicycleId: e.bicycleId});
+    deleteData({ bicycleId: e.bicycleId });
   };
+
+  const handleEditERC = (e) => {
+    console.log(e);
+    setShowCreateEvent(e);
+    setDataTypeERC(e);
+  };
+
+  const handleDeleteERC = (e) => {
+    deleteDataERC({ eventId: e.eventId });
+  };
+
+  useEffect(() => {
+    if (dataDelete || dataDeleteERC) {
+      window.location.reload();
+    }
+  }, [dataDelete, dataDeleteERC]);
 
   return (
     <div className="w-full p-2">
@@ -117,6 +147,28 @@ const Admin = () => {
         </ul>
       </div>
       <div id="default-tab-content">
+        {dataDelete ||
+          (dataDeleteERC && (
+            <div
+              className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <div>Borrada!</div>
+            </div>
+          ))}
+        {errorDelete ||
+          (errorDeleteERC && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <p>
+                {errorDeleteERC?.message ||
+                  (errorDeleteERC?.message &&
+                    "Ha ocurrido un error borrando...")}
+              </p>
+            </div>
+          ))}
         {optionSelected === "rent" && (
           <div
             className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
@@ -204,8 +256,10 @@ const Admin = () => {
             ) : (
               <div className="flex flex-wrap gap-2 ">
                 {bikes?.map((bicycle, index) => (
-                  <div key={index}>
-                    <hr />
+                  <div
+                    key={index}
+                    className="border border-gray-200 rounded-lg shadow "
+                  >
                     <div>
                       <button
                         className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
@@ -241,18 +295,21 @@ const Admin = () => {
             aria-labelledby="events-tab"
           >
             <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              Eventos
+              ERC (Eventos, Rutas o Competencias)
             </h1>
             <div className="mb-2">
               <button
                 onClick={() => setShowCreateEvent(!showCreateEvent)}
                 className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
               >
-                Crear Evento
+                {showCreateEvent ? "Ver todas las ERC" : "Crear ERC"}
               </button>
             </div>
             {showCreateEvent ? (
-              <CreateEvent />
+              <CreateEvent
+                setECRForm={(e) => handleSetBicycleFormECR(e)}
+                dataType={dataTypeERC}
+              />
             ) : (
               <div className="flex flex-wrap gap-2">
                 {eventsData?.map((event) => (
@@ -260,7 +317,27 @@ const Admin = () => {
                     key={event?._id}
                     className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                   >
-                    {event?.description}
+                    <div>
+                      <button
+                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
+                        onClick={() => handleEditERC(event)}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
+                        onClick={() => handleDeleteERC(event)}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                      Nombre:
+                      {event?.name}
+                    </p>
+                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                      Descripcion: {event?.description}
+                    </p>
                   </div>
                 ))}
               </div>

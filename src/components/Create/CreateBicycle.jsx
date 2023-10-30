@@ -3,6 +3,8 @@ import usePostData from "./../../hooks/usePostData";
 import { urlBicycleBridge, urlBicycleService } from "./../../utils/services";
 import usePatch from "./../../hooks/usePatch";
 
+const initialData = {}
+
 const CreateBicycle = ({ setBicycleForm, dataType = null }) => {
   const {
     data: response,
@@ -10,7 +12,7 @@ const CreateBicycle = ({ setBicycleForm, dataType = null }) => {
     error,
     postData,
   } = usePostData(urlBicycleBridge, urlBicycleService);
-  
+
   const { responsePatch, isLoadingPatch, errorPatch, patchData } = usePatch(
     urlBicycleBridge,
     urlBicycleService
@@ -61,6 +63,7 @@ const CreateBicycle = ({ setBicycleForm, dataType = null }) => {
     if (response) {
       setTimeout(() => {
         setBicycleForm(false);
+        window.location.reload();
       }, 1000);
     }
   }, [response]);
@@ -69,6 +72,7 @@ const CreateBicycle = ({ setBicycleForm, dataType = null }) => {
     if (responsePatch) {
       setTimeout(() => {
         setBicycleForm(false);
+        window.location.reload();
       }, 1000);
     }
   }, [responsePatch]);
@@ -99,7 +103,7 @@ const CreateBicycle = ({ setBicycleForm, dataType = null }) => {
           >
             <div>
               {response ? (
-                <div>{response?.message}</div>
+                <div>{response.message ? response.message : "Creada!"}</div>
               ) : (
                 <div>Bicicleta creada!</div>
               )}
@@ -221,7 +225,9 @@ const CreateBicycle = ({ setBicycleForm, dataType = null }) => {
                   />
                 </svg>
               </span>
-              {loading || isLoadingPatch ? "Creando..." : "Crear"}
+              {loading || isLoadingPatch
+                ? `${dataType ? "Actualizando..." : "Creando..."}`
+                : `${dataType ? "Editar" : "Crear"}`}
             </button>
           </div>
         </form>
