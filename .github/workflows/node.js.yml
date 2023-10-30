@@ -16,7 +16,11 @@ jobs:
 
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+      
     # strategy:
     #   matrix:
     #     node-version: [14.x, 16.x, 18.x]
