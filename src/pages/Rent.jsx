@@ -9,7 +9,7 @@ import {
   urlEditRentService,
 } from "./../utils/services";
 import UserContext from "./../store/UserContext.jsx";
-import usePatch from "./../hooks/usePatch";
+import usePostData from "./../hooks/usePostData";
 
 const Rent = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Rent = () => {
     urlGetAllRents,
     urlGetAllRentsService
   );
-  const { responsePatch, isLoadingPatch, errorPatch, patchData } = usePatch(
+  const { data: responsePatch, isLoading: isLoadingPatch, error: errorPatch, postData: patchData } = usePostData(
     urlEditRent,
     urlEditRentService
   );
@@ -108,7 +108,6 @@ const Rent = () => {
 
                     <p>Rent Date: {rent.rentDate}</p>
                     <p>Return Date: {rent.returnDate}</p>
-                    {/* <p>Status: {rent.status}</p> */}
                   </button>
                 </div>
               ))}

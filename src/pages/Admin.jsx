@@ -67,12 +67,6 @@ const Admin = () => {
     deleteDataERC({ eventId: e.eventId });
   };
 
-  useEffect(() => {
-    if (dataDelete || dataDeleteERC) {
-      window.location.reload();
-    }
-  }, [dataDelete, dataDeleteERC]);
-
   return (
     <div className="w-full p-2">
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
@@ -163,8 +157,8 @@ const Admin = () => {
               role="alert"
             >
               <p>
-                {errorDeleteERC?.message ||
-                  (errorDeleteERC?.message &&
+                {errorDeleteERC ||
+                  (errorDeleteERC &&
                     "Ha ocurrido un error borrando...")}
               </p>
             </div>
@@ -190,7 +184,7 @@ const Admin = () => {
             <div className="flex flex-wrap w-full h-96 overflow-y-auto">
               {rentData?.map((rent) => (
                 <div
-                  key={rent.rentId}
+                  key={rent?.rentId}
                   className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                 >
                   <div className="block py-2 pl-3 pr-4 text-indigo-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-indigo-600 md:p-0 dark:text-indigo-500 md:dark:hover:text-indigo-500 dark:hover:bg-gray-700 dark:hover:text-indigo-500 md:dark:hover:bg-transparent dark:border-gray-700">
@@ -205,23 +199,12 @@ const Admin = () => {
                     </svg>
 
                     <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                      Bicycle ID: {rent.bicycleId}
+                      Bicycle ID: {rent?.bicycleId}
                     </h5>
 
-                    <p>Rent Date: {rent.rentDate}</p>
-                    <p>Return Date: {rent.returnDate}</p>
-                    <p>
-                      Status:{" "}
-                      <span
-                        className={
-                          rent.status === "Available"
-                            ? "text-green-500"
-                            : "text-sky-950"
-                        }
-                      >
-                        {rent.status}
-                      </span>
-                    </p>
+                    <p>Rent Date: {rent?.rentDate}</p>
+                    <p>Return Date: {rent?.returnDate}</p>
+                    
                   </div>
                 </div>
               ))}
@@ -267,7 +250,7 @@ const Admin = () => {
                       >
                         Editar
                       </button>
-                      {bicycle.status === "Available" && (
+                      {bicycle?.status === "Available" && (
                         <button
                           className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
                           onClick={() => handleDeleteBicycle(bicycle)}
@@ -277,9 +260,9 @@ const Admin = () => {
                       )}
                     </div>
                     <Card
-                      status={bicycle.status}
-                      title={bicycle.brand}
-                      img={bicycle.image}
+                      status={bicycle?.status}
+                      title={bicycle?.brand}
+                      img={bicycle?.image}
                     />
                   </div>
                 ))}

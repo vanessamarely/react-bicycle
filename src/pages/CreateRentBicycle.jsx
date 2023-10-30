@@ -15,7 +15,6 @@ const initialData = {
   userId: 1,
   rentDate: "2021-06-01",
   returnDate: "2021-06-02",
-  status: "Returned",
   geolocation: {
     latitude: 0,
     longitude: 0,
@@ -55,7 +54,6 @@ const CreateRentBicycle = () => {
       userId: user?.id,
       rentDate: rentData?.rentDate,
       returnDate: rentData?.returnDate,
-      status: "Unavailable",
       geolocation,
     };
     postData(payload);
