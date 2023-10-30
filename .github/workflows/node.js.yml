@@ -41,6 +41,9 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
         
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
