@@ -14,6 +14,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
     # strategy:
     #   matrix:
     #     node-version: [14.x, 16.x, 18.x]
@@ -42,7 +45,6 @@ jobs:
       id: deployment
       uses: actions/deploy-pages@v1
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
         
     - name: Configure AWS credentials
