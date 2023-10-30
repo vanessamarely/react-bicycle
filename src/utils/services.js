@@ -23,28 +23,34 @@ const urlServices = {
 
 // Crear una renta de bicicleta - POST
 export const urlCreateRent = `${urlServices.bicycleBridgeRent}api/rent/registry`;
-
+export const urlCreateRentService = `${urlServices.bicycleRent}api/rent/registry`;
 // ver todas las rentas - GET
 export const urlGetAllRents = `${urlServices.bicycleBridgeRent}api/rent/getall`;
+export const urlGetAllRentsService = `${urlServices.bicycleRent}api/rent/getall`;
 
 // ver todas las rentas - UPDATE
+export const urlEditRent = `${urlServices.bicycleBridgeRent}api/rent/registry`;
+export const urlEditRentService = `${urlServices.bicycleRent}api/rent/registry`;
+export const urlDeleteRent = `${urlServices.bicycleBridgeRent}api/rent/registry`;
+export const urlDeleteRentService = `${urlServices.bicycleRent}api/rent/registry`;
 
 // ver todas las rentas - DELETE
-
 
 /* General info - Competences, Events, Routes */
 
 // ver todos los eventos - GET
 export const urlGetAllCER = `${urlServices.bicycleErcBridge}api/events`;
+export const urlGetAllCERService = `${urlServices.bicycleErc}api/events`;
 
 // ver todos los eventos - DELETE
 
 // ver todos los eventos - UPDATE
-
 
 // ver todos los bikes - GET
 export const urlGetAllBikes = `${urlServices.bicycleBridge}api/bikes`;
+export const urlGetAllBikesService = `${urlServices.bicycle}api/bikes`;
 
-// ver todos los eventos - DELETE
+// Crear una  bicicleta - POST/DELETE/UPDATE
+export const urlBicycleBridge = `${urlServices.bicycleBridge}api/bikes`;
+export const urlBicycleService = `${urlServices.bicycle}api/bikes`;
 
-// ver todos los eventos - UPDATE

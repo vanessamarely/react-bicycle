@@ -1,8 +1,13 @@
 import usePostData from "./../hooks/usePostData.jsx";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "./../store/UserContext.jsx";
-import { urlCreateRent, urlGetAllBikes } from "./../utils/services.js";
-import { Link } from "react-router-dom";
+import {
+  urlCreateRent,
+  urlCreateRentService,
+  urlGetAllBikes,
+  urlGetAllBikesService,
+} from "./../utils/services.js";
+import { Link, useNavigate } from "react-router-dom";
 import useFetch from "./../hooks/useFetch";
 
 const initialData = {
@@ -22,12 +27,16 @@ const initialGeolocationData = {
   longitude: 0,
 };
 
-const RentBicycle = () => {
+const CreateRentBicycle = () => {
+  const navigate = useNavigate();
   const [rentData, setRentData] = useState(null);
   const [geolocation, setGeolocationData] = useState(initialGeolocationData);
   const { user } = useContext(UserContext);
-  const { data, isLoading, error, postData } = usePostData(urlCreateRent);
-  const { response: bikes } = useFetch(urlGetAllBikes);
+  const { data, isLoading, error, postData } = usePostData(
+    urlCreateRent,
+    urlCreateRentService
+  );
+  const { response: bikes } = useFetch(urlGetAllBikes, urlGetAllBikesService);
 
   const handleLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -41,13 +50,12 @@ const RentBicycle = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const payload = {
       bicycleId: rentData?.bicycleId,
       userId: user?.id,
       rentDate: rentData?.rentDate,
       returnDate: rentData?.returnDate,
-      status: "Rented",
+      status: "Unavailable",
       geolocation,
     };
     postData(payload);
@@ -56,6 +64,14 @@ const RentBicycle = () => {
   useEffect(() => {
     handleLocation();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setTimeout(() => {
+        navigate("/home/rent");
+      }, 2000);
+    }
+  }, [data]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -100,13 +116,16 @@ const RentBicycle = () => {
                 }
                 id="InputIdBicycle"
                 className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                required
               >
                 <option value="">Seleccione una bicicleta</option>
-                {bikes?.filter((bicycle) => bicycle.status === "Available").map((bicycle, index) => (
-                  <option key={index} value={bicycle._id}>
-                    {bicycle.brand}
-                  </option>
-                ))}
+                {bikes
+                  ?.filter((bicycle) => bicycle.status === "Available")
+                  .map((bicycle, index) => (
+                    <option key={index} value={bicycle._id}>
+                      {bicycle.brand}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -134,6 +153,7 @@ const RentBicycle = () => {
               onChange={(e) =>
                 setRentData({ ...rentData, rentDate: e.target.value })
               }
+              required
             />
           </div>
           <div>
@@ -151,6 +171,7 @@ const RentBicycle = () => {
               onChange={(e) =>
                 setRentData({ ...rentData, returnDate: e.target.value })
               }
+              required
             />
           </div>
           {/* <div>
@@ -194,6 +215,7 @@ const RentBicycle = () => {
                     latitude: e.target.value,
                   })
                 }
+                required
               />
               <input
                 type="text"
@@ -207,6 +229,7 @@ const RentBicycle = () => {
                     longitude: e.target.value,
                   })
                 }
+                required
               />
             </div>
           </div>
@@ -224,4 +247,4 @@ const RentBicycle = () => {
   );
 };
 
-export default RentBicycle;
+export default CreateRentBicycle;

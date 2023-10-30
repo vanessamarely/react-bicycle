@@ -1,6 +1,6 @@
 import Card from "../components/Card/Card";
 import useFetch from "./../hooks/useFetch";
-import { urlGetAllBikes } from "./../utils/services";
+import { urlGetAllBikes, urlGetAllBikesService } from "./../utils/services";
 
 const Bicycle = () => {
   // const bicycle = [
@@ -30,7 +30,7 @@ const Bicycle = () => {
   //   },
   // ];
 
-  const { response: bikes } = useFetch(urlGetAllBikes);
+  const { response: bikes } = useFetch(urlGetAllBikes, urlGetAllBikesService);
 
   return (
     <div className="w-full">

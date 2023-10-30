@@ -1,46 +1,53 @@
 import { useState } from "react";
 
-function usePostData(urlBridge, urlService) {
+const useDelete = (urlBridge, urlService) => {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function postData(payload) {
-    setIsLoading(true);
-
+  const deleteData = async (params) => {
+    setLoading(true);
     try {
       const response = await fetch(urlBridge, {
-        method: "POST",
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(params),
       });
+
+      setData(response.data);
 
       if (!response.ok) {
         const responseService = await fetch(urlService, {
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(params),
         });
         const json = await responseService.json();
         setData(json);
-        setIsLoading(false);
+        setLoading(false);
       } else {
         const json = await response.json();
 
         setData(json);
-        setIsLoading(false);
+        setLoading(false);
       }
-    } catch (error) {
-      setError(error);
-      setIsLoading(false);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  return { data, isLoading, error, postData };
-}
+  return {
+    loadingDelete: loading,
+    dataDelete: data,
+    errorDelete: error,
+    deleteData,
+  };
+};
 
-export default usePostData;
+export default useDelete;

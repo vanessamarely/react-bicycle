@@ -1,18 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "../components/Card/Card";
 import useFetch from "./../hooks/useFetch";
 import {
   urlGetAllRents,
+  urlGetAllRentsService,
   urlGetAllCER,
   urlGetAllBikes,
+  urlGetAllCERService,
+  urlGetAllBikesService,
+  urlBicycleBridge,
+  urlBicycleService,
 } from "./../utils/services";
+import useDelete from "./../hooks/useDelete";
+import CreateEvent from "./../components/Create/CreateEvent";
+import CreateBicycle from "./../components/Create/CreateBicycle";
 
 const Admin = () => {
-  const { response: rentData } = useFetch(urlGetAllRents);
-  const { response: eventsData } = useFetch(urlGetAllCER);
-  const { response: bikes } = useFetch(urlGetAllBikes);
-
+  const { response: rentData, error } = useFetch(
+    urlGetAllRents,
+    urlGetAllRentsService
+  );
+  const { dataDelete, errorDelete, deleteData } = useDelete(
+    urlBicycleBridge,
+    urlBicycleService
+  );
+  const { response: eventsData } = useFetch(urlGetAllCER, urlGetAllCERService);
+  const { response: bikes } = useFetch(urlGetAllBikes, urlGetAllBikesService);
   const [optionSelected, setOptionSelected] = useState("rent");
+  const [showCreateEvent, setShowCreateEvent] = useState(false);
+  const [showCreateBicycle, setShowCreateBicycle] = useState(false);
+  const [dataType, setDataType] = useState(null);
+  const handleSetBicycleForm = (e) => {
+    setShowCreateBicycle(e);
+  };
+
+  const handleEditBicycle = (e) => {
+    setShowCreateBicycle(e);
+    setDataType(e);
+  };
+
+  const handleDeleteBicycle = (e) => {
+    deleteData({bicycleId: e.bicycleId});
+  };
+
   return (
     <div className="w-full p-2">
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
@@ -97,6 +127,14 @@ const Admin = () => {
             <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
               Todas las reservas
             </h1>
+            {error && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <p>{error?.message}</p>
+              </div>
+            )}
             <div className="flex flex-wrap w-full h-96 overflow-y-auto">
               {rentData?.map((rent) => (
                 <div
@@ -148,16 +186,51 @@ const Admin = () => {
             <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
               Bicicletas
             </h1>
-            <div className="flex flex-wrap gap-2 ">
-              {bikes?.map((bicycle, index) => (
-                <Card
-                  key={index}
-                  status={bicycle.status}
-                  title={bicycle.brand}
-                  img={bicycle.image}
-                />
-              ))}
+            <div className="mb-12">
+              <button
+                onClick={() => setShowCreateBicycle(!showCreateBicycle)}
+                className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+              >
+                {showCreateBicycle
+                  ? "Ver todas las Bicicletas"
+                  : "Crear Bicicleta"}
+              </button>
             </div>
+            {showCreateBicycle ? (
+              <CreateBicycle
+                setBicycleForm={(e) => handleSetBicycleForm(e)}
+                dataType={dataType}
+              />
+            ) : (
+              <div className="flex flex-wrap gap-2 ">
+                {bikes?.map((bicycle, index) => (
+                  <div key={index}>
+                    <hr />
+                    <div>
+                      <button
+                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
+                        onClick={() => handleEditBicycle(bicycle)}
+                      >
+                        Editar
+                      </button>
+                      {bicycle.status === "Available" && (
+                        <button
+                          className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
+                          onClick={() => handleDeleteBicycle(bicycle)}
+                        >
+                          Eliminar
+                        </button>
+                      )}
+                    </div>
+                    <Card
+                      status={bicycle.status}
+                      title={bicycle.brand}
+                      img={bicycle.image}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
         {optionSelected === "events" && (
@@ -167,14 +240,31 @@ const Admin = () => {
             role="tabpanel"
             aria-labelledby="events-tab"
           >
-            {eventsData?.map((event) => (
-              <div
-                key={event?._id}
-                className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              Eventos
+            </h1>
+            <div className="mb-2">
+              <button
+                onClick={() => setShowCreateEvent(!showCreateEvent)}
+                className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
               >
-                {event?.description}
+                Crear Evento
+              </button>
+            </div>
+            {showCreateEvent ? (
+              <CreateEvent />
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {eventsData?.map((event) => (
+                  <div
+                    key={event?._id}
+                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    {event?.description}
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         )}
       </div>

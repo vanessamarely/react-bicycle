@@ -92,7 +92,7 @@ const Login = () => {
               Need to sign up for an account?{" "}
               <Link
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                to="./../signup"
+                to="./signup"
               >
                 Click here.
               </Link>

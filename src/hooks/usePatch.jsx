@@ -1,37 +1,36 @@
 import { useState } from "react";
 
-function usePostData(urlBridge, urlService) {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+const usePatch = (urlBridge, urlService) => {
+  const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // const [isSuccess, setIsSuccess] = useState(false);
 
-  async function postData(payload) {
+  async function patchData(params) {
     setIsLoading(true);
 
     try {
       const response = await fetch(urlBridge, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(params),
       });
 
       if (!response.ok) {
         const responseService = await fetch(urlService, {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(params),
         });
         const json = await responseService.json();
-        setData(json);
+        setError(json);
         setIsLoading(false);
       } else {
         const json = await response.json();
-
-        setData(json);
+        setResponse(json);
         setIsLoading(false);
       }
     } catch (error) {
@@ -40,7 +39,12 @@ function usePostData(urlBridge, urlService) {
     }
   }
 
-  return { data, isLoading, error, postData };
-}
+  return {
+    responsePatch: response,
+    isLoadingPatch: isLoading,
+    errorPatch: error,
+    patchData,
+  };
+};
 
-export default usePostData;
+export default usePatch;

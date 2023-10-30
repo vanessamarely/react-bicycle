@@ -106,9 +106,9 @@ const Signup = () => {
           </div>
           <div>
             <span>
-              Go back to login?{" "}
+              Go back to login?
               <Link
-                to="/login"
+                to="/"
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
               >
                 Click here.

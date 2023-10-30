@@ -1,8 +1,11 @@
-import { urlGetAllCER } from "./../utils/services";
+import { urlGetAllCER, urlGetAllCERService } from "./../utils/services";
 import useFetch from "./../hooks/useFetch";
 
 const GeneralInfo = () => {
-  const { response, isLoading, error } = useFetch(urlGetAllCER);
+  const { response, isLoading, error } = useFetch(
+    urlGetAllCER,
+    urlGetAllCERService
+  );
   console.log(response);
   return (
     <section className="bg-white dark:bg-gray-900">
