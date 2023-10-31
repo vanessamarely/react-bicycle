@@ -230,34 +230,36 @@ const Admin = () => {
               />
             ) : (
               <div className="flex flex-wrap gap-2">
-                {eventsData?.map((event) => (
-                  <div
-                    key={event?._id}
-                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <div>
-                      <button
-                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
-                        onClick={() => handleEditERC(event)}
-                      >
-                        Editar
-                      </button>
-                      <button
-                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
-                        onClick={() => handleDeleteERC(event)}
-                      >
-                        Eliminar
-                      </button>
+                {Array.isArray(eventsData) &&
+                  eventsData.length > 0 &&
+                  eventsData?.map((event) => (
+                    <div
+                      key={event?._id}
+                      className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    >
+                      <div>
+                        <button
+                          className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
+                          onClick={() => handleEditERC(event)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
+                          onClick={() => handleDeleteERC(event)}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                      <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                        Nombre:
+                        {event?.name}
+                      </p>
+                      <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                        Descripcion: {event?.description}
+                      </p>
                     </div>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                      Nombre:
-                      {event?.name}
-                    </p>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                      Descripcion: {event?.description}
-                    </p>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </div>

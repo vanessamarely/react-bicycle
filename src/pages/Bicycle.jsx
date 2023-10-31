@@ -38,14 +38,16 @@ const Bicycle = () => {
         Bicicletas
       </h1>
       <div className="flex flex-wrap gap-2 ">
-        {bikes?.map((bicycle, index) => (
-          <Card
-            key={index}
-            status={bicycle.status}
-            title={bicycle.brand}
-            img={bicycle.image}
-          />
-        ))}
+        {Array.isArray(bikes) &&
+          bikes.length > 0 &&
+          bikes?.map((bicycle, index) => (
+            <Card
+              key={index}
+              status={bicycle.status}
+              title={bicycle.brand}
+              img={bicycle.image}
+            />
+          ))}
       </div>
     </div>
   );

@@ -30,22 +30,24 @@ const GeneralInfo = () => {
             Puedes revisar los eventos que se han realizado
           </h1>
           <div>
-            {response
-              ?.filter((event) => event.type === "event")
-              .map((event) => (
-                <div
-                  key={event?._id}
-                  className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                >
-                  <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                    Nombre:
-                    {event?.name}
-                  </p>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                    Descripcion: {event?.description}
-                  </p>
-                </div>
-              ))}
+            {Array.isArray(response) &&
+              response.length > 0 &&
+              response
+                .filter((event) => event.type === "event")
+                .map((event) => (
+                  <div
+                    key={event?._id}
+                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                      Nombre:
+                      {event?.name}
+                    </p>
+                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                      Descripcion: {event?.description}
+                    </p>
+                  </div>
+                ))}
           </div>
         </div>
         <div className="grid md:grid-cols-2 gap-8">
@@ -72,22 +74,24 @@ const GeneralInfo = () => {
               Puedes revisar las competencias que se han realizado
             </p>
             <div>
-              {response
-                ?.filter((event) => event.type === "competition")
-                .map((event) => (
-                  <div
-                    key={event?._id}
-                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                      Nombre:
-                      {event?.name}
-                    </p>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                      Descripcion: {event?.description}
-                    </p>
-                  </div>
-                ))}
+              {Array.isArray(response) &&
+                response.length > 0 &&
+                response
+                  .filter((event) => event.type === "competition")
+                  .map((event) => (
+                    <div
+                      key={event?._id}
+                      className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    >
+                      <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                        Nombre:
+                        {event?.name}
+                      </p>
+                      <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                        Descripcion: {event?.description}
+                      </p>
+                    </div>
+                  ))}
             </div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
@@ -119,22 +123,24 @@ const GeneralInfo = () => {
               Puedes revisar las rutas que se han realizado
             </p>
             <div>
-              {response
-                ?.filter((event) => event.type === "route")
-                .map((event) => (
-                  <div
-                    key={event?._id}
-                    className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                      Nombre:
-                      {event?.name}
-                    </p>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
-                      Descripcion: {event?.description}
-                    </p>
-                  </div>
-                ))}
+              {Array.isArray(response) &&
+                response.length > 0 &&
+                response
+                  .filter((event) => event.type === "route")
+                  .map((event) => (
+                    <div
+                      key={event?._id}
+                      className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    >
+                      <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                        Nombre:
+                        {event?.name}
+                      </p>
+                      <p className="mt-2 text-gray-600 dark:text-gray-400 text-center">
+                        Descripcion: {event?.description}
+                      </p>
+                    </div>
+                  ))}
             </div>
           </div>
         </div>

@@ -56,34 +56,36 @@ const ViewBicycle = () => {
         />
       ) : (
         <div className="flex flex-wrap gap-2 ">
-          {bikes?.map((bicycle) => (
-            <div
-              key={bicycle?.bicycleId}
-              className="border border-gray-200 rounded-lg shadow "
-            >
-              <div>
-                <button
-                  className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
-                  onClick={() => handleEditBicycle(bicycle)}
-                >
-                  Editar
-                </button>
-                {bicycle?.status === "Available" && (
+          {Array.isArray(bikes) &&
+            bikes.length > 0 &&
+            bikes?.map((bicycle) => (
+              <div
+                key={bicycle?.bicycleId}
+                className="border border-gray-200 rounded-lg shadow "
+              >
+                <div>
                   <button
-                    className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
-                    onClick={() => handleDeleteBicycle(bicycle)}
+                    className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
+                    onClick={() => handleEditBicycle(bicycle)}
                   >
-                    Eliminar
+                    Editar
                   </button>
-                )}
+                  {bicycle?.status === "Available" && (
+                    <button
+                      className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
+                      onClick={() => handleDeleteBicycle(bicycle)}
+                    >
+                      Eliminar
+                    </button>
+                  )}
+                </div>
+                <Card
+                  status={bicycle?.status}
+                  title={bicycle?.brand}
+                  img={bicycle?.image}
+                />
               </div>
-              <Card
-                status={bicycle?.status}
-                title={bicycle?.brand}
-                img={bicycle?.image}
-              />
-            </div>
-          ))}
+            ))}
         </div>
       )}
     </div>

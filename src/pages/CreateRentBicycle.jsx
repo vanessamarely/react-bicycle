@@ -117,13 +117,15 @@ const CreateRentBicycle = () => {
                 required
               >
                 <option value="">Seleccione una bicicleta</option>
-                {bikes
-                  ?.filter((bicycle) => bicycle.status === "Available")
-                  .map((bicycle, index) => (
-                    <option key={index} value={bicycle._id}>
-                      {bicycle.brand}
-                    </option>
-                  ))}
+                {Array.isArray(bikes) &&
+                  bikes.length > 0 &&
+                  bikes
+                    ?.filter((bicycle) => bicycle.status === "Available")
+                    .map((bicycle, index) => (
+                      <option key={index} value={bicycle._id}>
+                        {bicycle.brand}
+                      </option>
+                    ))}
               </select>
             </div>
           </div>
