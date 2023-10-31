@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Card from "../components/Card/Card";
+
 import useFetch from "./../hooks/useFetch";
 import {
   urlGetAllRents,
@@ -13,7 +13,7 @@ import {
 } from "./../utils/services";
 import useDelete from "./../hooks/useDelete";
 import CreateEvent from "./../components/Create/CreateEvent";
-import CreateBicycle from "./../components/Create/CreateBicycle";
+import ViewBicycle from "./../components/Views/Bicycles";
 
 const Admin = () => {
   const { response: rentData, error } = useFetch(
@@ -31,30 +31,14 @@ const Admin = () => {
   } = useDelete(urlGetAllCER, urlGetAllCERService);
 
   const { response: eventsData } = useFetch(urlGetAllCER, urlGetAllCERService);
-  const { response: bikes } = useFetch(urlGetAllBikes, urlGetAllBikesService);
+
   const [optionSelected, setOptionSelected] = useState("rent");
   const [showCreateEvent, setShowCreateEvent] = useState(false);
-  const [showCreateBicycle, setShowCreateBicycle] = useState(false);
-  const [dataType, setDataType] = useState(null);
   const [dataTypeERC, setDataTypeERC] = useState(null);
-
-  const handleSetBicycleForm = (e) => {
-    setShowCreateBicycle(e);
-    setDataType(null);
-  };
 
   const handleSetBicycleFormECR = (e) => {
     setShowCreateEvent(e);
     setDataTypeERC(null);
-  };
-
-  const handleEditBicycle = (e) => {
-    setShowCreateBicycle(e);
-    setDataType(e);
-  };
-
-  const handleDeleteBicycle = (e) => {
-    deleteData({ bicycleId: e.bicycleId });
   };
 
   const handleEditERC = (e) => {
@@ -66,6 +50,8 @@ const Admin = () => {
   const handleDeleteERC = (e) => {
     deleteDataERC({ eventId: e.eventId });
   };
+
+ 
 
   return (
     <div className="w-full p-2">
@@ -158,8 +144,7 @@ const Admin = () => {
             >
               <p>
                 {errorDeleteERC ||
-                  (errorDeleteERC &&
-                    "Ha ocurrido un error borrando...")}
+                  (errorDeleteERC && "Ha ocurrido un error borrando...")}
               </p>
             </div>
           ))}
@@ -182,7 +167,7 @@ const Admin = () => {
               </div>
             )}
             <div className="flex flex-wrap w-full h-96 overflow-y-auto">
-              {rentData?.map((rent) => (
+              {rentData && rentData?.map((rent) => (
                 <div
                   key={rent?.rentId}
                   className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
@@ -204,72 +189,13 @@ const Admin = () => {
 
                     <p>Rent Date: {rent?.rentDate}</p>
                     <p>Return Date: {rent?.returnDate}</p>
-                    
                   </div>
                 </div>
               ))}
             </div>
           </div>
         )}
-        {optionSelected === "bikes" && (
-          <div
-            className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
-            id="bikes"
-            role="tabpanel"
-            aria-labelledby="bikes-tab"
-          >
-            <h1 className="text-center mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              Bicicletas
-            </h1>
-            <div className="mb-12">
-              <button
-                onClick={() => setShowCreateBicycle(!showCreateBicycle)}
-                className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-              >
-                {showCreateBicycle
-                  ? "Ver todas las Bicicletas"
-                  : "Crear Bicicleta"}
-              </button>
-            </div>
-            {showCreateBicycle ? (
-              <CreateBicycle
-                setBicycleForm={(e) => handleSetBicycleForm(e)}
-                dataType={dataType}
-              />
-            ) : (
-              <div className="flex flex-wrap gap-2 ">
-                {bikes?.map((bicycle, index) => (
-                  <div
-                    key={index}
-                    className="border border-gray-200 rounded-lg shadow "
-                  >
-                    <div>
-                      <button
-                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
-                        onClick={() => handleEditBicycle(bicycle)}
-                      >
-                        Editar
-                      </button>
-                      {bicycle?.status === "Available" && (
-                        <button
-                          className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600m-2"
-                          onClick={() => handleDeleteBicycle(bicycle)}
-                        >
-                          Eliminar
-                        </button>
-                      )}
-                    </div>
-                    <Card
-                      status={bicycle?.status}
-                      title={bicycle?.brand}
-                      img={bicycle?.image}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        {optionSelected === "bikes" && <ViewBicycle />}
         {optionSelected === "events" && (
           <div
             className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800"

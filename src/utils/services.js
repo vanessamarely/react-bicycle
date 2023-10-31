@@ -25,8 +25,8 @@ export const url =
   "https://97hfvjai4m.execute-api.us-west-2.amazonaws.com/eafit/";
 
 // Crear una renta de bicicleta - POST
-//export const urlCreateRent = `${urlServices.bicycleBridgeRent}api/rent/registry`;
-export const urlCreateRent = `${url}api/rent/registry`;
+export const urlCreateRent = `${urlServices.bicycleBridgeRent}api/rent/registry`;
+//export const urlCreateRent = `${url}api/rent/registry`;
 //export const urlCreateRentService = `${urlServices.bicycleRent}api/rent/registry`;
 export const urlCreateRentService = `${url}api/service/rent/registry`;
 // ver todas las rentas - GET

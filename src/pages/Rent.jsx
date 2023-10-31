@@ -20,10 +20,12 @@ const Rent = () => {
     urlGetAllRents,
     urlGetAllRentsService
   );
-  const { data: responsePatch, isLoading: isLoadingPatch, error: errorPatch, postData: patchData } = usePostData(
-    urlEditRent,
-    urlEditRentService
-  );
+  const {
+    data: responsePatch,
+    isLoading: isLoadingPatch,
+    error: errorPatch,
+    postData: patchData,
+  } = usePostData(urlEditRent, urlEditRentService);
 
   const handleLocation = (lat, long) => {
     setLocation({ lat, long });
@@ -32,10 +34,7 @@ const Rent = () => {
   const handleIsSelected = (selected) => {
     setIsSelected(!isSelected);
 
-    handleLocation(
-      selected.geolocation.latitude,
-      selected.geolocation.longitude
-    );
+    handleLocation(selected.latitude, selected.longitude);
   };
 
   const handleEditRent = async (rent) => {
@@ -80,13 +79,14 @@ const Rent = () => {
                   key={rent?.rentId}
                   className="max-w-sm p-2 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                 >
-                  <button
-                    className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
-                    onClick={() => handleEditRent(rent)}
-                  >
-                    Entregar Bicicleta
-                  </button>
-
+                  {rent?.rentStatus === "open" && (
+                    <button
+                      className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 m-2"
+                      onClick={() => handleEditRent(rent)}
+                    >
+                      Entregar Bicicleta
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={() => handleIsSelected(rent)}
